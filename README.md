@@ -1,13 +1,13 @@
 # Realtime Currency Scraper
 
-A service to pulls exchange data from google finance on realtime and store into a local database to be consumed in our main app.
+A service that extracts exchange data from Google Finance in real time and stores it in a local database to be consumed in our main application.
 
 ## Features
 
-- [x] Create service to extract these data and via circuit breaker check if the connection is up or not.
+- [x] Create a service to extract this data and, using a circuit breaker, check whether the connection is active or not..
 
-- [x] Transform these data based on a model defined by us and send to the next stage
+- [x] Transform this data based on a model defined by us and send it to the next stage
 
-- [x] Apply cron jobs to run the pipeline every 2 hour without break.
+- [x]  Apply cron tasks to run the pipeline every 2 hours without interruption.
 
-- [x] If the connection was breaked along pull process, notify about the error and skip all following steps returning only the latest exchange extracted for the API with an extraction_status
+- [x] If the connection has been interrupted during the extraction process, notify the error and skip all the following steps, returning only the last exchange extracted to the API with an extraction_status
