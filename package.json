@@ -1,0 +1,36 @@
+{
+  "name": "realtime-currency-scraper",
+  "version": "1.0.0",
+  "description": "A service to pulls realtime currencies in google finance and save from a local database",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsup src",
+    "start:pipeline": "tsx src/main.ts",
+    "start:server": "tsx src/server.ts"
+  },
+  "keywords": [
+    "web-scraper",
+    "cron-jobs",
+    "circuit breaker"
+  ],
+  "author": "António Gabriel",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.5.0",
+    "@types/node-cron": "^3.0.8",
+    "@types/opossum": "^8.1.0",
+    "tsup": "^7.2.0",
+    "tsx": "^3.12.7",
+    "typescript": "^5.1.6"
+  },
+  "dependencies": {
+    "axios": "^1.4.0",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.21.0",
+    "node-cron": "^3.0.2",
+    "opossum": "^8.1.0",
+    "rxjs": "^7.8.1",
+    "zod": "^3.22.1"
+  }
+}
