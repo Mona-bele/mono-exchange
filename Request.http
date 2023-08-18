@@ -1,0 +1,10 @@
+POST http://localhost:3333/quote/create
+Content-Type: application/json
+
+{
+  "quoteCode": "RND-AOA"
+}
+
+###
+GET http://localhost:3333/quotes
+Content-Type: application/json
