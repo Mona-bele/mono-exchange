@@ -14,6 +14,8 @@ export abstract class Database {
 
   static async get() {
     const fileContents = await fs.readFile(this.$filePath, 'utf-8')
-    return JSON.parse(fileContents) ?? []
+    const exchanges = (JSON.parse(fileContents) as CurrencyData[]) ?? []
+
+    return exchanges
   }
 }
