@@ -1,5 +1,5 @@
 import { circuitBreaker } from 'lib/circuit-breaker'
-import { availableExchangesQuotes } from 'application/freezes/exchanges-quote'
+import { getQuotes } from 'application/system/get-quotes'
 import { ExtractionStageContract } from 'application/contracts/extraction-contract'
 
 export class ExtractExchangesScraper {
@@ -9,8 +9,10 @@ export class ExtractExchangesScraper {
       isFailure: false,
     }
 
-    for (const quoteCode of availableExchangesQuotes) {
-      const [source,] = quoteCode.split('-')
+    const quotes = await getQuotes.execute()
+
+    for (const quoteCode of quotes) {
+      const [source] = quoteCode.split('-')
 
       const result = await circuitBreaker.fire(quoteCode)
 
