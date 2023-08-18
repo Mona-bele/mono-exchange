@@ -3,24 +3,54 @@ import cron from 'node-cron'
 import { z } from 'zod'
 import { fastify } from 'fastify'
 import { runExchangesStagesPipeline } from 'main'
-import { FilterQuotes } from 'application/system/filter-quotes'
+import { getQuotes } from 'application/system/get-quotes'
+import { filterQuote } from 'application/system/filter-quotes'
+import { registerQuoteCode } from 'application/system/register-quote-code'
 
 const app = fastify()
 
-app.get('/exchanges/:quoteCode?', async (req) => {
-  const getQuotesQuerySchema = z.object({
-    quoteCode: z
-      .string()
-      .optional()
-      .transform((quoteCode) => quoteCode?.toUpperCase()),
-  })
+app.get('/exchanges/:quoteCode?', async (req, reply) => {
+  try {
+    const getQuotesQuerySchema = z.object({
+      quoteCode: z
+        .string()
+        .optional()
+        .transform((quoteCode) => quoteCode?.toUpperCase()),
+    })
 
-  const { quoteCode } = getQuotesQuerySchema.parse(req.params)
+    const { quoteCode } = getQuotesQuerySchema.parse(req.params)
 
-  const filterQuotes = new FilterQuotes()
-  const exchange = await filterQuotes.execute(quoteCode)
+    const exchange = await filterQuote.execute(quoteCode)
+    return exchange
+  } catch (error: any) {
+    reply.status(400).send(error.message)
+  }
+})
 
-  return exchange
+app.post('/quote/create', async (req, reply) => {
+  try {
+    const createQuoteCodeSchema = z.object({
+      quoteCode: z
+        .string()
+        .refine((value) => /^[A-Z]{3}-[A-Z]{3}$/.test(value), {
+          message: 'O par de moedas deve estar no formato "AAA-BBB"',
+        }),
+    })
+
+    const { quoteCode } = createQuoteCodeSchema.parse(req.body)
+    await registerQuoteCode.execute(quoteCode)
+
+    reply.status(201).send()
+  } catch (error: any) {
+    reply.status(400).send(error.message)
+  }
+})
+
+app.get('/quotes', async () => {
+  const quotes = await getQuotes.execute()
+  return {
+    quotes,
+  }
 })
 
 app.listen(
