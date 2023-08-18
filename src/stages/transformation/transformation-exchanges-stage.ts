@@ -35,9 +35,9 @@ export class TransformationExchangesStage {
 
         if (exchangeIndex !== -1) {
           if (exchange && quote) {
-            quote.split('/')[1].trim().substring(0, 3)
+            const quoteFormated = quote.split('/')[1].trim().substring(0, 3)
 
-            exchanges[exchangeIndex].quotes.push([quote, exchange])
+            exchanges[exchangeIndex].quotes.push([quoteFormated, exchange])
           } else {
             exchanges.splice(exchangeIndex, 1)
           }
