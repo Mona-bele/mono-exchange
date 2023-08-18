@@ -30,11 +30,11 @@ export async function runExchangesStagesPipeline() {
         }),
       )
       .subscribe({
-        error: (error) => console.error('Pipeline error:', error),
+        error: (error: any) => console.error('Pipeline error:', error.message),
         complete: () => console.log('Pipeline completed successfully'),
       })
-  } catch (error) {
-    console.error('Error during initialization:', error)
+  } catch (error: any) {
+    console.error('Error during initialization:', error.message)
   }
 }
 
