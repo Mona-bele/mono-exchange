@@ -1,14 +1,26 @@
 import cron from 'node-cron'
+
+import { z } from 'zod'
 import { fastify } from 'fastify'
-import { Database } from 'lib/database/database'
 import { runExchangesStagesPipeline } from 'main'
+import { FilterQuotes } from 'application/system/filter-quotes'
 
 const app = fastify()
 
-app.get('/exchanges', async () => {
-  const exchanges = await Database.get()
+app.get('/exchanges/:quoteCode?', async (req) => {
+  const getQuotesQuerySchema = z.object({
+    quoteCode: z
+      .string()
+      .optional()
+      .transform((quoteCode) => quoteCode?.toUpperCase()),
+  })
 
-  return exchanges
+  const { quoteCode } = getQuotesQuerySchema.parse(req.params)
+
+  const filterQuotes = new FilterQuotes()
+  const exchange = await filterQuotes.execute(quoteCode)
+
+  return exchange
 })
 
 app.listen(
@@ -17,8 +29,8 @@ app.listen(
   },
   () => {
     console.log('Server is running!')
-    // Schedule the pipeline to run every 2 hour
-    cron.schedule('0 */2 * * *', async () => {
+    // Schedule the pipeline to run every 3 minutes
+    cron.schedule('*/3 * * * *', async () => {
       await runExchangesStagesPipeline()
       console.log('Pipeline scheduled')
     })
