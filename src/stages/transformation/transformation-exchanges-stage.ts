@@ -9,7 +9,7 @@ export class TransformationExchangesStage {
   constructor(private readonly extractedData: ExtractionStageContract) {}
 
   transform(): TransformationStageContract {
-    if (!this.extractedData.isFailure) {
+    if (this.extractedData.data.length > 0) {
       const exchanges: CurrencyData[] = []
 
       this.extractedData.data.forEach(([source, data]) => {
