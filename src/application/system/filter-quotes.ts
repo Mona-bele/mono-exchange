@@ -1,6 +1,6 @@
 import { Database } from 'lib/database/database'
 
-export class FilterQuotes {
+class FilterQuotes {
   async execute(quoteCode?: string) {
     const exchanges = await Database.get()
 
@@ -19,3 +19,7 @@ export class FilterQuotes {
     return exchange
   }
 }
+
+const filterQuote = new FilterQuotes()
+
+export { filterQuote }
