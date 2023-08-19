@@ -22,6 +22,24 @@ export abstract class QuoteDB {
     await fs.writeFile(this.$filePath, convertToString)
   }
 
+  static async verifyFileExists() {
+
+    try {
+      await fs.stat(this.$filePath)
+      } catch {
+        this.$quotes = [
+          "EUR-USD",
+          "EUR-AOA",
+          "USD-EUR",
+          "USD-AOA",
+          "AOA-USD",
+          "AOA-EUR",
+        ]
+        const convertToString = JSON.stringify(this.$quotes, null, 2)
+        await fs.writeFile(this.$filePath, convertToString)
+    }
+  }
+
   static async get() {
     try {
       const fileContents = await fs.readFile(this.$filePath, 'utf-8')

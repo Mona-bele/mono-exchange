@@ -59,8 +59,8 @@ app.listen(
   },
   () => {
     console.log('Server is running!')
-    // Schedule the pipeline to run every 3 minutes
-    cron.schedule('*/3 * * * *', async () => {
+    // Schedule the pipeline to run every 2 hours
+    cron.schedule('0 */2 * * *', async () => {
       await runExchangesStagesPipeline()
       console.log('Pipeline scheduled')
     })
