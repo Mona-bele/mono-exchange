@@ -16,6 +16,6 @@ ENV NODE_ENV=production
 
 COPY --from=base /app/dist ./dist
 
-EXPOSE 3000
+EXPOSE 3333
 
 CMD ["node", "dist/server.js"]
