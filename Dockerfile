@@ -1,4 +1,4 @@
-FROM node:18-alpine as base
+FROM node:18-alpine
 
 WORKDIR /app
 
@@ -8,14 +8,8 @@ RUN npm i
 
 COPY . .
 
-RUN npm run build
-
-FROM base as production
-
 ENV NODE_ENV=production
-
-COPY --from=base /app/dist ./dist
 
 EXPOSE 3333
 
-CMD ["node", "dist/server.js"]
+CMD ["npm", "run", "start:server"]
