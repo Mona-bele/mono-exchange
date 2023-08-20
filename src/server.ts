@@ -8,6 +8,7 @@ import { filterQuote } from 'application/system/filter-quotes'
 import { registerQuoteCode } from 'application/system/register-quote-code'
 
 const app = fastify()
+const port = process.env.PORT || 3333;
 
 app.get('/exchanges/:quoteCode?', async (req, reply) => {
   try {
@@ -55,7 +56,7 @@ app.get('/quotes', async () => {
 
 app.listen(
   {
-    port: 3333,
+    port: Number(port),
   },
   () => {
     console.log('Server is running!')
