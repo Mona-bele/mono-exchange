@@ -23,20 +23,19 @@ export abstract class QuoteDB {
   }
 
   static async verifyFileExists() {
-
     try {
       await fs.stat(this.$filePath)
-      } catch {
-        this.$quotes = [
-          "EUR-USD",
-          "EUR-AOA",
-          "USD-EUR",
-          "USD-AOA",
-          "AOA-USD",
-          "AOA-EUR",
-        ]
-        const convertToString = JSON.stringify(this.$quotes, null, 2)
-        await fs.writeFile(this.$filePath, convertToString)
+    } catch {
+      this.$quotes = [
+        'EUR-USD',
+        'EUR-AOA',
+        'USD-EUR',
+        'USD-AOA',
+        'AOA-USD',
+        'AOA-EUR',
+      ]
+      const convertToString = JSON.stringify(this.$quotes, null, 2)
+      await fs.writeFile(this.$filePath, convertToString)
     }
   }
 
