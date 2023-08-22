@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A service to pulls realtime currencies in google finance and save from a local database",
   "main": "index.js",
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "build": "tsup src --out-dir build",
     "start:pipeline": "tsx src/main.ts",
