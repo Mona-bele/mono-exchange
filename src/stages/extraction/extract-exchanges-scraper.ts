@@ -1,6 +1,6 @@
-import { circuitBreaker } from 'lib/circuit-breaker'
-import { getQuotes } from 'application/system/get-quotes'
-import { ExtractionStageContract } from 'application/contracts/extraction-contract'
+import { circuitBreaker } from '../../lib/circuit-breaker'
+import { getQuotes } from '../../application/system/get-quotes'
+import { ExtractionStageContract } from '../../application/contracts/extraction-contract'
 
 export class ExtractExchangesScraper {
   async extract(): Promise<ExtractionStageContract> {

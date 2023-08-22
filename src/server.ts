@@ -2,10 +2,10 @@ import cron from 'node-cron'
 
 import { z } from 'zod'
 import { fastify } from 'fastify'
-import { runExchangesStagesPipeline } from 'main'
-import { getQuotes } from 'application/system/get-quotes'
-import { filterQuote } from 'application/system/filter-quotes'
-import { registerQuoteCode } from 'application/system/register-quote-code'
+import { runExchangesStagesPipeline } from './main'
+import { getQuotes } from './application/system/get-quotes'
+import { filterQuote } from './application/system/filter-quotes'
+import { registerQuoteCode } from './application/system/register-quote-code'
 
 const app = fastify()
 const port = process.env.PORT || 3333;
