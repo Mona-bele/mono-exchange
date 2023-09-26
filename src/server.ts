@@ -11,6 +11,13 @@ import { env } from 'env'
 
 const app = fastify()
 
+app.get('/', async (_, reply) => {
+  reply.status(200).send({
+    version: "0.0.1",
+    message: 'Welcome to mono exchange api'
+  })
+})
+
 app.get('/exchanges/:quoteCode?', async (req, reply) => {
   try {
     const getQuotesQuerySchema = z.object({
@@ -55,16 +62,17 @@ app.get('/quotes', async () => {
   }
 })
 
-app.listen(
-  {
+
+app
+  .listen({
     port: env.PORT,
-  },
-  () => {
+  })
+  .then(() => {
     console.log(`[SERVER]: Http server is running at ${env.PORT}`)
+   
     // Schedule the pipeline to run every 2 hours
     cron.schedule('0 */2 * * *', async () => {
       await runExchangesStagesPipeline()
-      console.log('Pipeline scheduled completed')
+      console.log('[PIPELINE]: scheduled completed')
     })
-  },
-)
+  })

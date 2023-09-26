@@ -1,4 +1,0 @@
-node_modules
-.env
-dist
-src/lib/database/*.json
