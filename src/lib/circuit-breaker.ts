@@ -1,5 +1,5 @@
 import { httpRequest } from "./axios"
-import { CircuitBreakerAdapter } from "application/adapters/circuit-breaker.adapter"
+import { CircuitBreakerAdapter } from "../application/adapters/circuit-breaker.adapter"
 
 const circuitBreakerOptions = {
   // timeout: 3000,

@@ -1,10 +1,10 @@
 import { Observable, from } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 
-import { LoadExchangesIntoJson } from 'stages/load/load-exchanges-into-json'
+import { LoadExchangesIntoJson } from './stages/load/load-exchanges-into-json'
 import { ExtractExchangesScraper } from './stages/extraction/extract-exchanges-scraper'
-import { TransformationStageContract } from 'application/contracts/transformation-contract'
-import { TransformationExchangesStage } from 'stages/transformation/transformation-exchanges-stage'
+import { TransformationStageContract } from './application/contracts/transformation-contract'
+import { TransformationExchangesStage } from './stages/transformation/transformation-exchanges-stage'
 
 export async function runExchangesStagesPipeline() {
   try {
