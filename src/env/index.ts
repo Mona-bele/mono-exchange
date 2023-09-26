@@ -6,7 +6,7 @@ const envSchema = z.object({
     .enum(['development', 'test', 'production'])
     .default('development'),
   EXCHANGES_API_URL: z.string(),
-  PORT: z.coerce.number().default(3333)
+  PORT: z.number().default(3333),
 })
 
 const _env = envSchema.safeParse(process.env)

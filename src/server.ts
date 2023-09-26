@@ -7,9 +7,9 @@ import { runExchangesStagesPipeline } from 'main'
 import { getQuotes } from 'application/system/get-quotes'
 import { filterQuote } from 'application/system/filter-quotes'
 import { registerQuoteCode } from 'application/system/register-quote-code'
+import { env } from 'env'
 
 const app = fastify()
-const port = process.env.PORT || 3333;
 
 app.get('/exchanges/:quoteCode?', async (req, reply) => {
   try {
