@@ -1,6 +1,7 @@
 import cron from 'node-cron'
 
 import { z } from 'zod'
+import { env } from 'env'
 import { fastify } from 'fastify'
 import { runExchangesStagesPipeline } from 'main'
 import { getQuotes } from 'application/system/get-quotes'
@@ -59,11 +60,11 @@ app.listen(
     port: env.PORT,
   },
   () => {
-    console.log('Server is running!')
+    console.log(`[SERVER]: Http server is running at ${env.PORT}`)
     // Schedule the pipeline to run every 2 hours
     cron.schedule('0 */2 * * *', async () => {
       await runExchangesStagesPipeline()
-      console.log('Pipeline scheduled')
+      console.log('Pipeline scheduled completed')
     })
   },
 )
