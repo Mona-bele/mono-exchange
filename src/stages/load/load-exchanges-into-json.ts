@@ -1,4 +1,4 @@
-import { Database } from 'lib/database/database'
+import { Database } from '../../lib/database/database'
 import { TransformationStageContract } from 'application/contracts/transformation-contract'
 
 export class LoadExchangesIntoJson {

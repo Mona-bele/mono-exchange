@@ -1,4 +1,4 @@
-import { QuoteDB } from 'lib/database/quote-db'
+import { QuoteDB } from '../../lib/database/quote-db'
 
 class GetQuotes {
   async execute() {
