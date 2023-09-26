@@ -1,14 +1,15 @@
 import cron from 'node-cron'
 
 import { z } from 'zod'
+import { env } from 'env'
 import { fastify } from 'fastify'
-import { runExchangesStagesPipeline } from './main'
-import { getQuotes } from './application/system/get-quotes'
-import { filterQuote } from './application/system/filter-quotes'
-import { registerQuoteCode } from './application/system/register-quote-code'
+import { runExchangesStagesPipeline } from 'main'
+import { getQuotes } from 'application/system/get-quotes'
+import { filterQuote } from 'application/system/filter-quotes'
+import { registerQuoteCode } from 'application/system/register-quote-code'
+import { env } from 'env'
 
 const app = fastify()
-const port = process.env.PORT || 3333;
 
 app.get('/exchanges/:quoteCode?', async (req, reply) => {
   try {
@@ -56,14 +57,14 @@ app.get('/quotes', async () => {
 
 app.listen(
   {
-    port: Number(port),
+    port: env.PORT,
   },
   () => {
-    console.log('Server is running!')
+    console.log(`[SERVER]: Http server is running at ${env.PORT}`)
     // Schedule the pipeline to run every 2 hours
     cron.schedule('0 */2 * * *', async () => {
       await runExchangesStagesPipeline()
-      console.log('Pipeline scheduled')
+      console.log('Pipeline scheduled completed')
     })
   },
 )
