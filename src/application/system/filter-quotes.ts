@@ -1,4 +1,4 @@
-import { Database } from 'lib/database/database'
+import { Database } from '../../lib/database/database'
 
 class FilterQuotes {
   async execute(quoteCode?: string) {
