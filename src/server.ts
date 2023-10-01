@@ -1,7 +1,6 @@
 import cron from 'node-cron'
 
 import { z } from 'zod'
-import { env } from 'env'
 import { fastify } from 'fastify'
 import { runExchangesStagesPipeline } from 'main'
 import { getQuotes } from 'application/system/get-quotes'

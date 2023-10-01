@@ -7,7 +7,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "build": "tsup src --out-dir build",
+    "build": "tsup src",
     "start:pipeline": "tsx src/main.ts",
     "start:server": "tsx src/server.ts"
   },
@@ -35,8 +35,5 @@
     "opossum": "^8.1.0",
     "rxjs": "^7.8.1",
     "zod": "^3.22.1"
-  },
-  "engines": {
-    "node": ">=16.0.0"
   }
 }
