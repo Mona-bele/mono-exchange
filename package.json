@@ -9,6 +9,7 @@
   "scripts": {
     "build": "tsup src --out-dir build",
     "start:pipeline": "tsx src/main.ts",
+    "start:clusters": "pm2 start ecosystem.config.js",
     "start:server": "tsx src/server.ts"
   },
   "keywords": [
