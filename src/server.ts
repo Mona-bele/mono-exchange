@@ -61,17 +61,10 @@ app.get('/quotes', async () => {
   }
 })
 
-
 app
   .listen({
     port: env.PORT,
   })
   .then(() => {
-    console.log(`[SERVER]: Http server is running at ${env.PORT}`)
-   
-    // Schedule the pipeline to run every 2 hours
-    cron.schedule('0 */2 * * *', async () => {
-      await runExchangesStagesPipeline()
-      console.log('[PIPELINE]: scheduled completed')
-    })
+    console.log(`[SERVER]: Http server is running at ${env.PORT}`)    
   })
